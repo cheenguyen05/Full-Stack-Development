@@ -8,7 +8,7 @@
     display: grid;
     grid-template-rows: min-content auto min-content;
     /* TODO: modify the line below to add the needed grid-template-areas for header, main, and footer elements*/
-    grid-template-areas:
+    grid-template-areas: 
       "header"
       "main"
       "footer";
@@ -41,9 +41,9 @@
                               "a2 b2";
     */
     grid-template-areas: 
-        "sec1 aside1"
-        "sec2 aside2"
-        "sec3 sec3";
+      "sec1 aside1"
+      "sec2 aside2"
+      "sec3";
     height: 100%;
   }
   
@@ -78,33 +78,42 @@
   }
   
   */
+  #header {
+    grid-area: header;
+}
 
-  /* Set grid-area for each element with an ID */
+#main {
+    grid-area: main;
+}
+
+#footer {
+    grid-area: footer;
+}
+
 #sec1 {
-  grid-area: sec1; /* Define grid-area for sec1 */
+    grid-area: sec1;
 }
 
 #sec2 {
-  grid-area: sec2; /* Define grid-area for sec2 */
+    grid-area: sec2;
 }
 
 #sec3 {
-  grid-area: sec3; /* Define grid-area for sec3 */
+    grid-area: sec3;
 }
 
 #aside1 {
-  grid-area: aside1; /* Define grid-area for aside1 */
+    grid-area: aside1;
 }
 
 #aside2 {
-  grid-area: aside2; /* Define grid-area for aside2 */
+    grid-area: aside2;
 }
 
 #nav1 {
-  grid-area: nav1; /* Define grid-area for nav1 */
+    grid-area: nav1;
 }
 
 #nav2 {
-  grid-area: nav2; /* Define grid-area for nav2 */
+    grid-area: nav2;
 }
-  
