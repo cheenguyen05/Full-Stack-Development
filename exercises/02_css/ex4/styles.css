@@ -103,11 +103,11 @@
   }
 
   aside1 {
-    grid-area: aside; /* Set grid-area for aside1 */
+    grid-area: aside1; /* Set grid-area for aside1 */
   }
 
   aside2 {
-    grid-area: aside; /* Set grid-area for aside2 */
+    grid-area: aside2; /* Set grid-area for aside2 */
   }
 
   nav1 {
