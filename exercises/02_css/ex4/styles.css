@@ -78,42 +78,33 @@
   }
   
   */
-  header {
-    grid-area: header; /* Set grid-area for header */
-  }
 
-  main {
-    grid-area: main; /* Set grid-area for main */
-  }
+  /* Set grid-area for each element with an ID */
+#sec1 {
+  grid-area: sec1; /* Define grid-area for sec1 */
+}
 
-  footer {
-    grid-area: footer; /* Set grid-area for footer */
-  }
+#sec2 {
+  grid-area: sec2; /* Define grid-area for sec2 */
+}
 
-  sec1 {
-    grid-area: section1; /* Set grid-area for section1 */
-  }
+#sec3 {
+  grid-area: sec3; /* Define grid-area for sec3 */
+}
 
-  sec2 {
-    grid-area: section2; /* Set grid-area for section2 */
-  }
+#aside1 {
+  grid-area: aside1; /* Define grid-area for aside1 */
+}
 
-  sec3 {
-    grid-area: section3; /* Set grid-area for section3 */
-  }
+#aside2 {
+  grid-area: aside2; /* Define grid-area for aside2 */
+}
 
-  aside1 {
-    grid-area: aside1; /* Set grid-area for aside1 */
-  }
+#nav1 {
+  grid-area: nav1; /* Define grid-area for nav1 */
+}
 
-  aside2 {
-    grid-area: aside2; /* Set grid-area for aside2 */
-  }
-
-  nav1 {
-    grid-area: nav1; /* Set grid-area for nav1 */
-  }
-
-  nav2 {
-    grid-area: nav2; /* Set grid-area for nav2 */
-  }
+#nav2 {
+  grid-area: nav2; /* Define grid-area for nav2 */
+}
+  
