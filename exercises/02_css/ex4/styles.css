@@ -8,7 +8,10 @@
     display: grid;
     grid-template-rows: min-content auto min-content;
     /* TODO: modify the line below to add the needed grid-template-areas for header, main, and footer elements*/
-    grid-template-areas: "";
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
     height: 100vh;
   }
   
@@ -37,7 +40,10 @@
       grid-template-areas:    "a1 b1"
                               "a2 b2";
     */
-    grid-template-areas: "";
+    grid-template-areas: 
+        "sec1 aside1"
+        "sec2 aside2"
+        "sec3 sec3";
     height: 100%;
   }
   
@@ -59,7 +65,7 @@
     grid-area: f;
     display: grid;
     /* TODO: modify the line below to add the needed grid-template-areas for the navigation elements*/
-    grid-template-areas: "";
+    grid-template-areas: "nav1 nav2";
     padding: 1.5rem;
   }
   
@@ -72,3 +78,42 @@
   }
   
   */
+  header {
+    grid-area: header; /* Set grid-area for header */
+  }
+
+  main {
+    grid-area: main; /* Set grid-area for main */
+  }
+
+  footer {
+    grid-area: footer; /* Set grid-area for footer */
+  }
+
+  sec1 {
+    grid-area: section1; /* Set grid-area for section1 */
+  }
+
+  sec2 {
+    grid-area: section2; /* Set grid-area for section2 */
+  }
+
+  sec3 {
+    grid-area: section3; /* Set grid-area for section3 */
+  }
+
+  aside1 {
+    grid-area: aside; /* Set grid-area for aside1 */
+  }
+
+  aside2 {
+    grid-area: aside; /* Set grid-area for aside2 */
+  }
+
+  nav1 {
+    grid-area: nav1; /* Set grid-area for nav1 */
+  }
+
+  nav2 {
+    grid-area: nav2; /* Set grid-area for nav2 */
+  }
