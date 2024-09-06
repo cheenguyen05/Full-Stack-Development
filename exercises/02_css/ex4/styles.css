@@ -78,42 +78,31 @@
   }
   
   */
-  #header {
-    grid-area: header;
-}
 
-#main {
-    grid-area: main;
-}
-
-#footer {
-    grid-area: footer;
-}
-
-#sec1 {
+ #sec1 {
     grid-area: sec1;
-}
+ }
 
-#sec2 {
+ #sec2 {
     grid-area: sec2;
-}
+ }
 
-#sec3 {
+ #sec3 {
     grid-area: sec3;
-}
+ }
 
-#aside1 {
+ #aside1 {
     grid-area: aside1;
-}
+ }
 
-#aside2 {
+ #aside2 {
     grid-area: aside2;
-}
+ }
 
-#nav1 {
+ #nav1 {
     grid-area: nav1;
-}
+ }
 
-#nav2 {
+ #nav2 {
     grid-area: nav2;
-}
+ }
