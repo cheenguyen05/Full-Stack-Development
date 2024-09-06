@@ -43,7 +43,7 @@
     grid-template-areas: 
       "sec1 aside1"
       "sec2 aside2"
-      "sec3";
+      "sec3 sec3";
     height: 100%;
   }
   
@@ -80,15 +80,15 @@
   */
 
  #sec1 {
-    grid-area: sec1;
+    grid-area: section1;
  }
 
  #sec2 {
-    grid-area: sec2;
+    grid-area: section2;
  }
 
  #sec3 {
-    grid-area: sec3;
+    grid-area: section3;
  }
 
  #aside1 {
