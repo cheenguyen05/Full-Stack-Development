@@ -19,7 +19,7 @@
     width: 100%;
     min-height: 15%;
     /* TODO: needed grid stuff */
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr; /* Single column for the header */
   }
   
   section {
@@ -35,7 +35,6 @@
     font-size: 1.5em;
     /* TODO: needed grid stuff */
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 10px;
   }
   
   footer {
@@ -44,7 +43,7 @@
     min-height: 15%;
     /* TODO: needed grid stuff */
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 10px; /* Adjusts spacing between grid items */
+
   }
   
   nav {
