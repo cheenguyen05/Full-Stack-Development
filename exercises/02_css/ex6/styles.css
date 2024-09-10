@@ -101,6 +101,13 @@ An example:
     grid-template-rows: repeat(7, auto);
     grid-template-columns: 1fr;
   }
+  #sec1 { grid-area: sec1; }
+  #sec2 { grid-area: sec2; }
+  #sec3 { grid-area: sec3; }
+  #aside1 { grid-area: aside1; }
+  #aside2 { grid-area: aside2; }
+  #nav1 { grid-area: nav1; }
+  #nav2 { grid-area: nav2; }
 }
 /* Media Query for Phones and Tablets */
 @media (min-width: 600px) and (max-width: 991px) {
@@ -114,6 +121,13 @@ An example:
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr 1fr;
   }
+  #sec1 { grid-area: sec1; }
+  #sec2 { grid-area: sec2; }
+  #sec3 { grid-area: sec3; }
+  #aside1 { grid-area: aside1; }
+  #aside2 { grid-area: aside2; }
+  #nav1 { grid-area: nav1; }
+  #nav2 { grid-area: nav2; }
 }
 /* Media Query for Screens Larger than Tablets */
 @media (min-width: 992px) {
@@ -126,4 +140,11 @@ An example:
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr 1fr 1fr;
   }
+  #sec1 { grid-area: sec1; }
+  #sec2 { grid-area: sec2; }
+  #sec3 { grid-area: sec3; }
+  #aside1 { grid-area: aside1; }
+  #aside2 { grid-area: aside2; }
+  #nav1 { grid-area: nav1; }
+  #nav2 { grid-area: nav2; }
 }
