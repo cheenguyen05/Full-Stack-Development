@@ -9,11 +9,14 @@ function addDescendantCounts() {
       
       // If there are descendants, append the count to the <li>'s text
       if (descendants.length > 0) {
-        li.textContent += ` (${descendants.length})`;
+        // Get current text content of the <li>
+        const currentText = li.childNodes[0].nodeValue.trim();
+  
+        // Append the count wrapped in parentheses
+        li.childNodes[0].nodeValue = `${currentText} (${descendants.length})`;
       }
     });
   }
+
   
-  // Run the function
-  addDescendantCounts();
   
