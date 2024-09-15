@@ -6,6 +6,20 @@
  */
 function sortTableByColumn(col, table) {
   // TODO: Implement this function as instructed
+  // Select the tbody and all rows inside it
+  const tbody = table.querySelector('tbody');
+  const rowsArray = Array.from(tbody.rows);
+
+  // Sort the rows based on the text content in the specified column
+  const sortedRows = rowsArray.sort((rowA, rowB) => {
+    const cellA = rowA.cells[col].textContent.trim().toLowerCase();
+    const cellB = rowB.cells[col].textContent.trim().toLowerCase();
+    
+    return cellA.localeCompare(cellB);
+  });
+
+  // Append the sorted rows back to the tbody (this will reorder them)
+  sortedRows.forEach(row => tbody.appendChild(row));
 }
 
 /**
