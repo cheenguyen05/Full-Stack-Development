@@ -2,21 +2,27 @@ function addDescendantCounts() {
     // Select all <li> elements in the document
     const listItems = document.querySelectorAll('li');
   
-    // Loop through each <li> element
-    listItems.forEach(li => {
-      // Find all descendant <li> elements for the current <li>
-      const descendants = li.querySelectorAll('li');
-      
-      // If there are descendants, append the count to the <li>'s text
-      if (descendants.length > 0) {
-        // Get current text content of the <li>
-        const currentText = li.childNodes[0].nodeValue.trim();
+    // Function to count all descendant <li> elements
+    function countDescendants(li) {
+      return li.querySelectorAll('li').length;
+    }
   
-        // Append the count wrapped in parentheses
-        li.childNodes[0].nodeValue = `${currentText} (${descendants.length})`;
+    // Loop through each <li> element in reverse order (to handle deeper lists first)
+    Array.from(listItems).reverse().forEach(li => {
+      // Count the number of descendant <li> elements
+      const descendantCount = countDescendants(li);
+  
+      // Only append the count if there are descendants
+      if (descendantCount > 0) {
+        // Get the current text content of the <li>
+        const currentText = li.firstChild.nodeValue.trim();
+  
+        // Append the count wrapped in parentheses to the text node
+        li.firstChild.nodeValue = `${currentText} (${descendantCount})`;
       }
     });
   }
+
 
   
   
