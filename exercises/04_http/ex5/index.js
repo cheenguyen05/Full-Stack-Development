@@ -17,6 +17,8 @@ http.createServer(function (request, response) {
     readFileSendResponse('data.html', 'text/html', response);
   } else if (request.headers['accept'].includes('application/zip')) {
     readFileSendResponse('data.zip', 'application/zip', response);
+  } else if (request.headers['accept'].includes('text/plain')) {
+    readFileSendResponse('data.txt', 'text/plain', response);
   } else if (request.headers['accept'].includes('*/*')) {
     readFileSendResponse('data.txt', '*/*', response);
   } else {
