@@ -1,7 +1,7 @@
 // See https://www.npmjs.com/package/chai
 const chai = require('chai');
 // See https://www.npmjs.com/package/chai-http
-const chaiHttp = require('chai-http');
+import chaiHttp from 'chai-http';
 // Your server implementation
 const server = require('../index.js');
 // Using 'should' style, see: https://www.chaijs.com/guide/styles/#should
