@@ -58,6 +58,7 @@ const server = http.createServer((req,res)=>{
     }
     else {
         res.writeHead(404)
+        res.write('Requested content not found')
         res.end()
     }
 })
