@@ -15,15 +15,21 @@ const readFileSendResponse = (fileName, contentType, response) => {
 }
 
 http.createServer(function(request, response) {
-    if (request.url === '/') {
-        readFileSendResponse('index.html', 'text/html', response);
-    } else if (request.url === '/classical') {
-        readFileSendResponse('homer.html', 'text/html', response);
-    } else if (request.url === '/dystopy') {  // Đường dẫn chính xác là '/dystopy'
-        readFileSendResponse('bradbury.html', 'text/html', response);
+    if (request.headers['accept'] && request.headers['accept'].includes('text/html')) {
+        if (request.url === '/'){
+            readFileSendResponse('index.html', 'text/html', response);
+        } else if (request.url === '/classical'){
+            readFileSendResponse('homer.html', 'text/html', response);
+        } else if (request.url === '/dystopia'){
+            readFileSendResponse('bradbury.html', 'text/html', response);
+        } else {
+            response.writeHead(404, { 'Content-Type': 'text/plain' });
+            response.write('Requested content not found');
+            response.end();
+        }
     } else {
-        response.writeHead(404, { 'Content-Type': 'text/plain' });
-        response.write('Requested content not found');
+        response.statusCode = 404;
+        response.statusMessage = 'Requested content not found';
         response.end();
-    }
+      }
 }).listen(3000);
