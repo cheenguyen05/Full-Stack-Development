@@ -1,4 +1,4 @@
-const http = require('node:http');
+const http = require('http');
 
 http.createServer(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
