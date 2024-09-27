@@ -26,7 +26,7 @@ describe('Going through the routes', () => {
         .get('/just_an_example_random_path_to_get_a_404')
         .end((err, res) => {
           res.should.have.status(404);
-          res.text.should.be.eql('');
+          res.text.should.be.eql('Not Found');
           done();
         });
     });
