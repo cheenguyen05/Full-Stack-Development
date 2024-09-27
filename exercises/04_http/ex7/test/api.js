@@ -1,7 +1,7 @@
 // See https://www.npmjs.com/package/chai
 const chai = require('chai');
 // See https://www.npmjs.com/package/chai-http
-import chaiHttp from 'chai-http';
+const chaiHttp = require('chai-http');
 // Your server implementation
 const server = require('../index.js');
 // Using 'should' style, see: https://www.chaijs.com/guide/styles/#should
@@ -58,22 +58,21 @@ describe('Going through the routes', () => {
     // As the result the status of the test should go from 'pending' to 'passing'
     // Even thou just leaving the function inside <em>end</em> method will pass,
     //  you must write the tests as described in the TODO inside the end method.
-    it('it should GET the homer.html'
+    it('it should GET the homer.html', (done) => {
       // TODO uncomment the needed parts
       // BE EXTRA CAREFUL WITH THE PARANTHESES WHEN UNCOMMENTING! SEE THE EXAMPLES ABOVE!
-      , (done) => {
-          chai.request(server)
-              .get('/classical')
-              .end((err, res) => {
+      chai.request(server)
+        .get('/classical')
+        .end((err, res) => {
       //             // TODO: test that 
-      //             // a) the response should have HTTP response status of 200, and
-                      res.should.have.status(200);
+      //             // a) the response should have HTTP response status of 200, and,
+          res.should.have.status(200);
       //             // b) that the response is in HTML form, and
-                      res.should.be.html;
-      //             // c) that the text of the response is equal to homer.html, so here the response text should be equal to const homer
-                      res.text.should.be.eql(homer);
-                      done();
-         });
+          res.should.be.html;
+      //             // c) that the text of the response is equal to homer.html, so here the response text should be equal to const homerm homer
+          res.text.should.be.eql(homer);
+          done();
+        });
     });
   });
 
@@ -81,16 +80,26 @@ describe('Going through the routes', () => {
    * Test the /dystopy route, should receive bradbury.html
    */
   describe('GET /dystopy path', () => {
-    it(('it should GET the bradbury.html')
-          , (done) => {
-              chai.request(server)
-                  .get('/dystopy')
-                  .end((err, res) => {
-                    res.should.have.status(200);
-                    res.should.be.html;
-                    res.text.should.be.eql(bradbury);
-                    done();
-                  });
-          });
+    // TODO modify the it statement to use the function that has been 
+    // commented out below.
+    // You also need to uncomment the needed parts.
+    // As the result the status of the test should go from 'pending' to 'passing'
+    // Even thou just leaving the function inside <em>end</em> method will pass,
+    //  you must write the tests as described in the TODO inside the end method.
+    it('it should GET the bradbury.html', (done) => {
+      // BE EXTRA CAREFUL WITH THE PARANTHESES WHEN UNCOMMENTING! SEE THE EXAMPLES ABOVE!
+      chai.request(server)
+        .get('/dystopy')
+        .end((err, res) => {
+      // TODO: test that 
+      // a) the response should have HTTP response status of 200, and 
+          res.should.have.status(200);                       
+      // b) that the response is in HTML form
+          res.should.be.html;
+      // c) the text of the response is equal to bradbury.html,  so here the response text should be equal to const bradbury 
+          res.text.should.be.eql(bradbury);
+          done();
+        });
+    });
   });
 });
