@@ -2,7 +2,7 @@ const http = require('http')
 const fs = require("fs");
 
 
-module.exports =  http.createServer((req,res)=>{
+module.exports = http.createServer((request, response) => {
     if(req.url === "/"){
         fs.readFile("index.html",(err,pagersp)=>{
             if(err){
@@ -50,7 +50,7 @@ module.exports =  http.createServer((req,res)=>{
                 res.write('Requested content not found',err)
             }
             else{
-                res.writeHead(200,{'Content-Type':'text.html'});
+                res.writeHead(200,{'Content-Type':'text/html'});
                 res.write(pagersp);
             }
             res.end();
@@ -60,4 +60,6 @@ module.exports =  http.createServer((req,res)=>{
         res.writeHead(404)
         res.end()
     }
-}).listen(3000)
+})
+
+server.listen(3000)
