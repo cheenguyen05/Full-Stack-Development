@@ -26,6 +26,9 @@ app.get('/', (req, res) => {
 // - If logged in: redirect to /profile page
 // - If not logged in: display htmlForm below for the login page.
 app.get('/login', (req, res) => {
+  if (req.session.username){
+    return res.redirect('/profile');
+  }
   const htmlForm = 
   `
     <h2>Login</h2>
@@ -34,7 +37,8 @@ app.get('/login', (req, res) => {
       <input type="text" name="username" required>
       <button type="submit">Login</button>
     </form>
-  `
+  `;
+  res.send(htmlForm);
 
 });
 
@@ -42,6 +46,10 @@ app.get('/login', (req, res) => {
 // - Handle the login and store the username in the session
 // - Redirect to the /profile page after login
 app.post('/login', (req, res) => {
+  //save username
+  req.session.username = req.body.username;
+  //after login
+  res.redirect('/profile');
 
 });
 
@@ -49,18 +57,28 @@ app.post('/login', (req, res) => {
 // - If logged in: display the profilePage only if the user is logged in
 // - If not logged in: redirect to /login page
 app.get('/profile', (req, res) => {
+  if (!req.session.username){
+    return res.redirect('/login');
+  }
   let profilePage = 
   `
     <h2>Profile</h2>
     <p>Welcome, ${req.session.username}!</p>
     <p><a href="/logout">Logout</a></p>
-  `
+  `;
+  res.send(profilePage);
 
 });
 
 // TODO: Route: Logout (GET request)
 // Destroy the session and redirect to home
 app.get('/logout', (req, res) => {
+  req.session.destroy((err)=>{
+    if (err){
+      return res.status(500).send('Failed to logout');
+    }
+    res.redirect('/');
+  });
 
 });
 
