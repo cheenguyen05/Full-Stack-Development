@@ -17,18 +17,37 @@ function createSession() {
     return sessionId;
 }
 
+// Function to parse cookies from request headers
+function parseCookies(cookieHeader) {
+    const cookies = {};
+    if (cookieHeader) {
+        cookieHeader.split(';').forEach(cookie => {
+            const [name, value] = cookie.split('=').map(c => c.trim());
+            cookies[name] = value;
+        });
+    }
+    return cookies;
+}
+
 // Create the HTTP server
 const server = http.createServer((req, res) => {
     // TODO: 
     // - Parse cookies from the request headers and extract the session ID.
+    const cookies = parseCookies(req.headers.cookie);
+    let sessionId = cookies.sessionId;
     // - Save the session ID in variable sessionId declared as a placeholder below.
-    let sessionId = null;
+    
 
     // TODO: 
     // - Check if the session ID exists, if not, create a new session using createSession() 
     // - After generated, set the session ID as a cookie in the response headers.
     // - The cookie should have the following format: sessionId=<sessionId>.
-
+    if (!sessionId || !sessions[sessionId]) {
+        // If no session or invalid session, create a new session
+        sessionId = createSession();
+        // Set the sessionId as a cookie in the response headers
+        res.setHeader('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`);
+    }
 
     const session = sessions[sessionId]; 
     
