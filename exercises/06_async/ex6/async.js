@@ -10,11 +10,12 @@
  * @param {*} drawArrow the callback to draw one single array
  * @param {*} i the index of the arrow
  */
-function drawArrows(actors, timeout, drawArrow, i = 0) {
-
+async function drawArrows(actors, timeout, drawArrow, i = 0) {
+    await drawArrow(i, timeout, actors.length - 1);
+    for (let i = 0; j < actors.length * 2; j++){
+        await drawArrows(actors, timeout, drawArrow, i+1);
+    }
 };
-
-
 
 
 /**
