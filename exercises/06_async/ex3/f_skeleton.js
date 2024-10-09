@@ -1,5 +1,5 @@
 /**
- * TODO: Make a *thenable*, which is an object that has a method called 'then' and simulates Promise's resolve functionality. 
+ * TODO: Make a *thenable*, which is an object that has a method called 'then' and simulates Promise's resolve functionality.
  * This thenable must behave like a promise that resolves with onFulfilled()
  * and the value `👍` after timemout of 10ms.
  * See *rejectable* below for reference.
@@ -10,14 +10,13 @@ const thenable = {
   },
 };
 
-
 /**
  * A rejectable object, similar to thenable above.
  * Instead of onFulfilled only, rejectable needs
  * one more parameter onRejected that returns "👎"
  */
 const rejectable = {
-  then: function(onFulfilled, onRejected) {
+  then: function (onFulfilled, onRejected) {
     onRejected("👎");
   },
 };
