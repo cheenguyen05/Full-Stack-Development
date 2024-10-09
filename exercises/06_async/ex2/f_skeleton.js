@@ -41,14 +41,12 @@ const g = (value) => {
  * a rejected Promise with message "Not a function!" otherwise
  */
 const checkIfFunction = (param) => {
-     return new Promise((resolve, reject) => {
-       if (typeof param === "function") {
-         resolve(value);
-       } else {
-         reject(new Error("Not a function!"));
-       }
-     });
-   };
+  if (param instanceof Function) {
+    return true;
+  } else {
+    throw "Not a function!";
+  }
+};
 
 /**
  * TODO: Implement a function 'p' that returns a resolved Promise after a given time.
