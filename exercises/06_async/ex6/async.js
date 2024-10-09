@@ -11,10 +11,14 @@
  * @param {*} i the index of the arrow
  */
 async function drawArrows(actors, timeout, drawArrow, i = 0) {
-    await drawArrow(i, timeout, actors.length - 1);
-    for (let i = 0; j < actors.length * 2; j++){
-        await drawArrows(actors, timeout, drawArrow, i+1);
+    let linesDrawn = 0;
+    
+    for (let i = 0; i < actors.length * 2; i++) {
+        await drawArrow(i, timeout, actors.length - 1);
+        await new Promise(resolve => setTimeout(resolve, timeout));
+        linesDrawn++; 
     }
+    return linesDrawn; 
 };
 
 
