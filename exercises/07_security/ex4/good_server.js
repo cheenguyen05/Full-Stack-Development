@@ -122,7 +122,7 @@ const server = http.createServer(function(request, response) {
             <p>Transfer money to other users with the super safe form which uses the latest HTTP GET method!</p>
             <form action="/money_transfer" method="get">
               <div class="container">
-                <input type="hidden" name="csrf_token" id="csrf_token" value="${setCSRFtoken()}" />
+                <input type="hidden" name="csrf_token" id="csrf_token" value="setCSRFtoken()" />
                 <label for="from"><b>Transfer from</b></label>
                 <input type="text" value="good_user" name="from" required readonly>
                 <label for="to"><b>Transfer to</b></label>
@@ -132,11 +132,10 @@ const server = http.createServer(function(request, response) {
                 <button type="submit">Transfer money</button>
               </div>
             </form>
-            <p>CSRF token in form: ${setCSRFtoken()}</p>  <!-- Hiển thị token trên trang để kiểm tra -->
           </body>
           </html>
         `
-      );      
+      );
       return;
     }
     // TODO
@@ -212,15 +211,14 @@ const checkUser = (userName, password) => {
 const setCSRFtoken = () => {
   let randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
-  let length = 10;  // Chiều dài của chuỗi token
-  for (let i = 0; i < length; i++) {
+  const tokenLength = 10; 
+  for (let i = 0; i < tokenLength; i++) {
     result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
   }
-  csrfTokens.push(result);  // Đẩy token vào mảng csrfTokens
-  console.log("Generated CSRF token:", result);  // Ghi lại token để kiểm tra
+  csrfTokens.push(result); 
+  console.log("Generated CSRF Token:", result);  // Debugging: log the generated token
   return result;
 };
-
 
 // TODO: implement the function as specified below
 /**
@@ -231,10 +229,9 @@ const setCSRFtoken = () => {
  * @returns {number} The index of the first element in the array that passes the test. Otherwise, -1.
  */
 const checkCSRFtoken = (token) => {
-  const tokenIndex = csrfTokens.indexOf(token);
-  console.log("Checking CSRF token:", token, "Index found:", tokenIndex);
-  if (tokenIndex > -1) {
-    csrfTokens.splice(tokenIndex, 1);  // Xóa token sau khi xác thực
+  const index = csrfTokens.indexOf(token);
+  if (index !== -1) {
+    csrfTokens.splice(index, 1); // Remove the token once it is used
   }
-  return tokenIndex;
+  return index; // Return the index or -1 if not found
 };
