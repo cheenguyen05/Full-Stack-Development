@@ -27,13 +27,22 @@ const server = http.createServer((request, response) => {
             </head>
             <body>
                 <p id="xss">Here be XSS!  queryObject['addThisText'] is now: </p>
-                ${queryObject['addThisText']}
+                ${sanitizedText}
             </body >
             </html >
     `);
   console.log("queryObject['addThisText']: ", queryObject['addThisText']);
   response.end();
 });
+
+// Sanitize HTML function
+function sanitizeHTML(str) {
+  return str.replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+}
 
 // DO NOT MODIFY BELOW THIS LINE
 module.exports = server;
