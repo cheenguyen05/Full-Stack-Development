@@ -16,6 +16,8 @@ const server = http.createServer((request, response) => {
 
   // TODO: sanitize the the 'addThisText' query parameter user input so that injected scripts won't run
   // addThisText from the query parameters is accessed with queryObject['addThisText']. It should be sanitized with encodeURIComponent().
+  const sanitizedText = encodeURIComponent(queryObject['addThisText'] || '');
+  
   response.write(
     `   <!doctype html>
             <html lang="en">
