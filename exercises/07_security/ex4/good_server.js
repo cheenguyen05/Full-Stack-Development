@@ -122,6 +122,7 @@ const server = http.createServer(function(request, response) {
             <p>Transfer money to other users with the super safe form which uses the latest HTTP GET method!</p>
             <form action="/money_transfer" method="get">
               <div class="container">
+                <input type="hidden" name="csrf_token" id="csrf_token" value="setCSRFtoken()" />
                 <label for="from"><b>Transfer from</b></label>
                 <input type="text" value="good_user" name="from" required readonly>
                 <label for="to"><b>Transfer to</b></label>
@@ -141,12 +142,12 @@ const server = http.createServer(function(request, response) {
     // NOTE: before this TODO, implement the checkCSRFtoken() function at the end of this file
     // Here we check that the CSRF token returned by the checkCSRFtoken() is present in request, and  is a valid one
     // Just uncomment the else if block below, after you have coded your checkCSRFtoken() function at the end of this file
-    // else if (checkCSRFtoken(query.csrf_token) === -1) {
-    //   response.statusCode = 403;
-    //   response.statusMessage = "Missing or wrong CSRF token";
-    //   response.end('Missing or wrong CSRF token');
-    //   return;
-    // }
+    else if (checkCSRFtoken(query.csrf_token) === -1) {
+      response.statusCode = 403;
+      response.statusMessage = "Missing or wrong CSRF token";
+      response.end('Missing or wrong CSRF token');
+      return;
+    }
     else {
       response.writeHead(200, { 'Content-Type': 'text/html' });
       response.end(
@@ -208,8 +209,14 @@ const checkUser = (userName, password) => {
  * @returns {string} Return a random string used as the value of CSRF token
  */
 const setCSRFtoken = () => {
-
-}
+  let randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i=0; i<length; i++) {
+    result += randomChars.charAt(
+      Math.floor(Math.random().toString(10)*randomChars.length)
+  );
+  } return result;
+};
 
 // TODO: implement the function as specified below
 /**
@@ -220,5 +227,5 @@ const setCSRFtoken = () => {
  * @returns {number} The index of the first element in the array that passes the test. Otherwise, -1.
  */
 const checkCSRFtoken = (token) => {
-
+  return csrfTokens.indexOf(token);
 }
