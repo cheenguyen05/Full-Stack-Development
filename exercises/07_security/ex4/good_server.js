@@ -132,10 +132,11 @@ const server = http.createServer(function(request, response) {
                 <button type="submit">Transfer money</button>
               </div>
             </form>
+            <p>CSRF token in form: ${setCSRFtoken()}</p>  <!-- Hiển thị token trên trang để kiểm tra -->
           </body>
           </html>
         `
-      );
+      );      
       return;
     }
     // TODO
@@ -211,14 +212,15 @@ const checkUser = (userName, password) => {
 const setCSRFtoken = () => {
   let randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
-  let length =10;
-  for (let i=0; i<length; i++) {
-    result += randomChars.charAt(
-      Math.floor(Math.random().toString(10)*randomChars.length)
-  );
-  csrfTokens.push(result); 
-  } return result;
+  let length = 10;  // Chiều dài của chuỗi token
+  for (let i = 0; i < length; i++) {
+    result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+  }
+  csrfTokens.push(result);  // Đẩy token vào mảng csrfTokens
+  console.log("Generated CSRF token:", result);  // Ghi lại token để kiểm tra
+  return result;
 };
+
 
 // TODO: implement the function as specified below
 /**
@@ -230,8 +232,9 @@ const setCSRFtoken = () => {
  */
 const checkCSRFtoken = (token) => {
   const tokenIndex = csrfTokens.indexOf(token);
+  console.log("Checking CSRF token:", token, "Index found:", tokenIndex);
   if (tokenIndex > -1) {
     csrfTokens.splice(tokenIndex, 1);  // Xóa token sau khi xác thực
   }
   return tokenIndex;
-}
+};
