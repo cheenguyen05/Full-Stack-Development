@@ -143,7 +143,7 @@ const adminOnly = (req, res, next) => {
     return res.status(403).send('Access denied');
 };
 
-app.post('/events/:id/delete', usersOnly, (req, res) => {
+app.post('/events/:id/delete', usersOnly, adminOnly, (req, res) => {
     const index = events.findIndex(e => e._id === req.params.id);
 
     if (index !== -1) {
