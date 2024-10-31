@@ -140,7 +140,7 @@ const adminOnly = (req, res, next) => {
         return next(); // User is an admin, proceed to the route handler
     }
     // If not an admin, redirect or respond with an error
-    return res.status(403).send('Access denied');
+    return res.redirect('/events'); // or wherever you want to redirect non-admin users
 };
 
 app.post('/events/:id/delete', usersOnly, adminOnly, (req, res) => {
