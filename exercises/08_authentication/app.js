@@ -136,7 +136,7 @@ app.post('/events/:id', usersOnly, (req, res) => {
 
 // Middleware to check if the user is an admin
 const adminOnly = (req, res, next) => {
-    if (req.user && req.user.role === 'admin') {
+    if (req.session && req.session.user && req.session.user.role === 'admin') {
         return next(); // User is an admin, proceed to the route handler
     }
     // If not an admin, redirect or respond with an error
