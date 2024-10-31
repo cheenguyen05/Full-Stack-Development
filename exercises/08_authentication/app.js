@@ -133,7 +133,16 @@ app.post('/events/:id', usersOnly, (req, res) => {
     return res.redirect('/events');
 });
 
-//TODO: This should only be available to signed in users with the role of admin
+
+// Middleware to check if the user is an admin
+const adminOnly = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        return next(); // User is an admin, proceed to the route handler
+    }
+    // If not an admin, redirect or respond with an error
+    return res.status(403).send('Access denied');
+};
+
 app.post('/events/:id/delete', usersOnly, (req, res) => {
     const index = events.findIndex(e => e._id === req.params.id);
 
@@ -161,13 +170,17 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res) => {
     let errors = [];
-    //TODO: Pluck name, email, password from request, 
+    //TODO: Pluck name, email, password from request,
+    const { name, email, password } = req.body; 
     //find a way to hold the information for validation, 
     //possibly for passing back to the form as old form input data,
     //and for persisting in the users array
     
     //TODO: Validate those info (at least that they exists and are not empty (""))
     //TODO: Add validation errors, if those info are missing
+    if (!name || name.trim() === '') errors.push('Name is required!');
+    if (!email || email.trim() === '') errors.push('Email is required!');
+    if (!password || password.trim() === '') errors.push('Password is required!');
     //Error strings are provided to make testing easier
     const ERROR_NAME_MISSING = 'Name is required!';
     const ERROR_EMAIL_MISSING = 'Email is required!';
@@ -175,15 +188,18 @@ app.post('/register', async (req, res) => {
     const ERROR_EMAIL_IN_USE = 'Email is already in use!';
     
     //TODO: Check that that email is not yet in use
+    if (users.find(u => u.email === email)) {
+        errors.push('Email is already in use!');
+    }
     //if one is in use, return back to form and show the error ERROR_EMAIL_IN_USE
     
     if(errors.length > 0) {
         //TODO: Store validation errors in the session
-        
+        req.session.errors = errors;
         //TODO: Send back potential old data to use in create -form
-        
+        req.session.oldInput = { name, email};
         //TODO: PRG, Post-Redirect-Get, return a redirect back to GET /register
-        
+        return res.redirect('/register');
     }
 
     //TODO: Generate a unique id for the new user, you can use uuid()
@@ -191,18 +207,24 @@ app.post('/register', async (req, res) => {
     //TODO: Make sure the new user starts with a role of "user"
     
     //TODO: Make sure the new user's password is set as the bcrypt hash of the provided password
+    const newUser = {
+        _id: uuid(),
+        name,
+        email,
+        password: await bcrypt.hash(password, 10), // Hash the password
+        role: 'user' // Default role
+    };
     
     //TODO: "Save" the new user by pushing it into the users array
-    
+    users.push(newUser);
 
     //TODO: Store the new user in session, so that they are logged in
-    
 
-    //TODO: remove this return once other steps are completed
-    return res.send("Not implemented yet!");
+    req.session.user = newUser;
 
     return res.redirect('/');
 });
+    
 
 app.get('/login', (req, res) => {
     //Try to get validation errors out of session
