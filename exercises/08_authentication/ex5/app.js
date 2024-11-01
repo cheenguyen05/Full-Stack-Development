@@ -1,21 +1,23 @@
-var express=require('express')
-var path=require('path')
-var indexRouter=require('./routes/index')
-var usersRouter=require('./routes/users')
-var app=express()
+const express = require('express');
+const path = require('path');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-app.use(express.urlencoded({extended:false}));
 
-// Routes
-app.use('/', indexRouter);
-app.use("/users", usersRouter);
+(function() {
+    const app = express();
+    app.use(express.urlencoded({ extended: false }));
 
-app.listen(3000);
+    // Routes
+    app.use('/', indexRouter);
+    app.use("/users", usersRouter);
 
-function log(error="")
-{
-    return 0;
-    console.log(`Oops! Something went wrong: ${error}`);
-}
+    app.listen(3000);
 
-module.exports = app;
+    // If you need the log function, keep it here; otherwise, remove it.
+    function log(error = "") {
+        console.log(`Oops! Something went wrong: ${error}`);
+    }
+
+    module.exports = app;
+})();

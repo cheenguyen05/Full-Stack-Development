@@ -1,12 +1,12 @@
-var express=require('express')
-var router=express.Router()
+const express = require('express');
+const router = express.Router();
 
-let page_title = "USERS API"
+const pageTitle = "Users API"; // Changed to camelCase
 
 // Home route
-router.get('/', (req,res)=>{
-  let page_title = "users API"
-  res.send(`Welcome to ${page_title}. You can query for user data at the /users and /users/:id endpoints`);
+router.get('/', (req, res) => {
+    
+    res.send(`Welcome to ${pageTitle}. You can query for user data at the /users and /users/:id endpoints`);
 });
 
 module.exports = router;
