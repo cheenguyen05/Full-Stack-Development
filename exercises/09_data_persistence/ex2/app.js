@@ -6,8 +6,11 @@ const addTask = () => {
 
     //TODO: 
     //1. get the tasks
+    const tasks = getTasks();
     //2. push the new task to tasks, set done to false
+    tasks.push({text: taskText, done: false});
     //3. save the tasks
+    saveTasks(tasks);
 
     taskInput.value = '';
     renderTasks();
@@ -16,12 +19,15 @@ const addTask = () => {
 const getTasks = () => {
     //TODO:
     //1. read the tasks from localStorage
+    const tasks = localStorage.getItem('tasks');
     //2. return the read tasks using JSON parse or an empty array if none were found
+    return tasks ? JSON.parse(tasks) : [];
 };
 
 const saveTasks = tasks => {
     //TODO:
     //1. save the tasks in localstorage using JSON stringify
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 const renderTasks = () => {
@@ -46,6 +52,8 @@ const renderTasks = () => {
 const clearList = () => {
     //TODO:
     //1. empty local storage
+    localStorage.removeItem('tasks');
+    renderTasks();
     //2. update UI
 };
 
