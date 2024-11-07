@@ -5,8 +5,8 @@ const eventSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Name is required!'],
-        minlen: 1,
-        maxlen: 50
+        minlength: 1,
+        maxlength: 50
     },
     date: {
         type: String,
@@ -21,7 +21,7 @@ const eventSchema = new mongoose.Schema({
         default: 'planned'
     },
     description: {
-        type: String,
+        type: String
     }
 });
 
