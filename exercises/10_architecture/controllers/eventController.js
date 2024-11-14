@@ -20,65 +20,48 @@ exports.create = (req, res) => {
     return res.render('events/create', { title: 'Create a new event', user, event, errors });
 };
 
+// Store a new event
 exports.store = async (req, res) => {
     try {
         const event = new Event(req.body);
         await event.save();
-
         return res.redirect('/events');
     } catch (error) {
-        if(error.name === 'ValidationError') {
-            const errors = [];
-            for(let field in error.errors) {
-                errors.push(error.errors[field].message);
-            }
-
-            //Store validation errors in the session
-            req.session.errors = errors;
-            //PRG, Post-Redirect-Get
-            return res.redirect(`/events/create`);
+        if (error.name === 'ValidationError') {
+            req.session.errors = Object.values(error.errors).map(e => e.message);
+            return res.redirect('/events/create');
         }
     }
 };
 
+// Show form to edit an event
 exports.edit = async (req, res) => {
     const user = req.session.user;
-
     const event = await Event.findById(req.params.id);
-    if(!event) return res.status(404).send();
+    if (!event) return res.status(404).send();
 
-    //Try to get validation errors out of session
     const errors = req.session.errors || [];
-    //Clear validation errors from session
     delete req.session.errors;
 
     return res.render('events/edit', { title: `Edit ${req.params.id}`, user, event, errors });
 };
 
-exports.post = async (req, res) => {
+// Update an event
+exports.update = async (req, res) => {
     try {
         const event = await Event.findByIdAndUpdate(req.params.id, req.body, { new: false, runValidators: true });
-
-        if(!event) return res.status(404).send();
-
+        if (!event) return res.status(404).send();
         return res.redirect('/events');
     } catch (error) {
-        if(error.name === 'ValidationError') {
-            const errors = [];
-            for(let field in error.errors) {
-                errors.push(error.errors[field].message);
-            }
-
-            //Store validation errors in the session
-            req.session.errors = errors;
-            //PRG, Post-Redirect-Get
+        if (error.name === 'ValidationError') {
+            req.session.errors = Object.values(error.errors).map(e => e.message);
             return res.redirect(`/events/${req.params.id}`);
         }
     }
 };
 
+// Delete an event
 exports.delete = async (req, res) => {
     await Event.findByIdAndDelete(req.params.id);
-
     return res.redirect('/events');
 };
