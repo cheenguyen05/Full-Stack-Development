@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
-
+const session = require('express-session');
 const bodyParser = require('body-parser');
-
 const mongoose = require('mongoose');
 require('dotenv').config();
 
 const Event = require('./models/Event');
 const User = require('./models/User');
+const apiRoutes = require('./routes/api');
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -34,6 +34,7 @@ app.use(bodyParser.json()); //this will also accept JSON from the tests
 // Use routes
 app.use('/', userRoutes);
 app.use('/', eventRoutes);
+app.use('/', apiRoutes);
 
 // Redirect root to events
 app.get('/', (req, res) => res.redirect('/events'));
