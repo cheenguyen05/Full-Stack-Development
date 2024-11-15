@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
+const sessionAuthMiddleware = require('../middleware/sessionAuthMiddleware');
 
 // Route mappings
 router.get('/events', eventController.all);

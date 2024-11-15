@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const session = require('express-session');
+
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -30,12 +30,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //this will also accept JSON from the tests
 
-//Set up sessions
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
-}));
 
 // Use routes
 app.use('/', userRoutes);
