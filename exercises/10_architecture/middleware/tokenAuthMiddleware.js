@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
 
     // Check if Authorization header is present
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'Unauthorized. Token missing or invalid.' });
+        return res.status(401).json({ error: 'Unauthorized', message: 'Authorization header is missing or malformed' });
     }
 
     const token = authHeader.split(' ')[1]; // Extract the token from "Bearer <token>"
@@ -18,6 +18,6 @@ module.exports = (req, res, next) => {
         req.user = decoded;
         next(); // Proceed to the next middleware or route handler
     } catch (error) {
-        return res.status(401).json({ error: 'Unauthorized. Invalid token.' });
+        return res.status(401).json({ error: 'Unauthorized', message: 'Invalid or expired token' });
     }
 };
