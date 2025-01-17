@@ -31,9 +31,6 @@ async function drawArrows(actors, timeout, drawArrow, i = 0) {
     : null;
 }
 
-
-
-
 /**
  * DO NOT TOUCH THIS: drawArrowSync is the utility function for sync.test.js
  * The test just checks the accuracy of drawing, this is done synchronously,

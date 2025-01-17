@@ -211,13 +211,11 @@ const checkUser = (userName, password) => {
 const setCSRFtoken = () => {
   let randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
-  const tokenLength = 10; 
-  for (let i = 0; i < tokenLength; i++) {
-    result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-  }
-  csrfTokens.push(result); 
-  console.log("Generated CSRF Token:", result);  // Debugging: log the generated token
-  return result;
+  for (let i=0; i<length; i++) {
+    result += randomChars.charAt(
+      Math.floor(Math.random().toString(10)*randomChars.length)
+  );
+  } return result;
 };
 
 // TODO: implement the function as specified below
@@ -229,9 +227,5 @@ const setCSRFtoken = () => {
  * @returns {number} The index of the first element in the array that passes the test. Otherwise, -1.
  */
 const checkCSRFtoken = (token) => {
-  const index = csrfTokens.indexOf(token);
-  if (index !== -1) {
-    csrfTokens.splice(index, 1); // Remove the token once it is used
-  }
-  return index; // Return the index or -1 if not found
-};
+  return csrfTokens.indexOf(token);
+}

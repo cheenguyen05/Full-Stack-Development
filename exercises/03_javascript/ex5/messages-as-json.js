@@ -11,7 +11,6 @@ document.addEventListener("userDataReady", function (e) {
       // Image Avatar
       elementFragment?.querySelector("img")?.setAttribute("src", element.avatar);
   
-      // Image Alt
       elementFragment
         .querySelector("img")
         .setAttribute("alt", element.firstName + " " + element.lastName);
